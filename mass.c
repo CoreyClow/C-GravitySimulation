@@ -95,3 +95,14 @@ void clearMassList(int size, Mass *masses[], int viewingWidth, int viewingHeight
 		clearMass(*masses[i],viewingWidth,viewingHeight);
 	}
 }
+
+void freeMass(Mass *mass){
+	free(mass);
+}
+
+void freeMassList(int size, Mass *masses[]){
+	for(int i = 0; i < size; i++){
+		freeMass(masses[i]);
+	}
+	//possibly free the list later on when it is malloced?
+}

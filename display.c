@@ -26,8 +26,8 @@ void setCursor(int row, int col){
 }
 
 void clearWithin(int row, int col, int width, int height){
-	for(int i = row; i < height;i++){
-		for(int j = col; j < width; j++){
+	for(int i = row; i <row+ height;i++){
+		for(int j = col; j < col+width; j++){
 			setCursor(i,j);
 			put(' ');
 		}

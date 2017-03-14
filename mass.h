@@ -8,6 +8,7 @@ set of functions and typedefs for mass
 #include "display.h"
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 //the character that is printed when a mass is printed
 #define MASS_CHARACTER 'o'
 
@@ -95,5 +96,21 @@ description: clears each mass in a list from the display
 */
 void clearMassList(int size, Mass *masses[], int viewingWidth, int viewingHeight);
 
+/**
+function: freeMass
+description: frees dynamically allocated memory of a mass struct
+
+@param mass the pointer to a mass created using malloc
+*/
+void freeMass(Mass *mass);
+
+/**
+function: freeMassList
+description: frees every dynamically allocated mass in a list
+
+@param size the size of the list
+@param mass a list of pointers to dynamically allocated masses
+*/
+void freeMassList(int size, Mass *masses[]);
 #endif
 
