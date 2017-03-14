@@ -29,7 +29,7 @@ void updateMassList(int size, Mass *masses[]){
 				continue;
 
 			//acceleration before components x and y
-			double accel= ((G*(mass1->mass*mass2->mass))/distanceSquared);
+			double accel= ((G*(mass2->mass))/distanceSquared);
 			
 			//break into components x and y
 			//angle is in radians
