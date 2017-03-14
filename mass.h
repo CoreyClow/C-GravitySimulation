@@ -11,17 +11,25 @@ set of functions and typedefs for mass
 #define MASS_CHARACTER 'o'
 
 typedef struct{
-        int mass;
+        float mass;
         //position
-        int x;
-        int y;
+        float x;
+        float y;
         //velocity
-        int xVel;
-        int yVel;
+        float xVel;
+        float yVel;
         //acceleration
-        int xAcc;
-        int yAcc;
+        float xAcc;
+        float yAcc;
 }Mass;
+
+/**
+function: updateMass
+description: updates the position, and velocity of a single mass
+	based on its velocity and acceleration.
+@param mass a pointer to a mass to update
+*/
+void updateMass(Mass *mass);
 
 /**
 function: printMass

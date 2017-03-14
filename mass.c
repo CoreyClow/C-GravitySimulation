@@ -4,6 +4,16 @@ function definitions of mass related things
 */
 #include "mass.h"
 
+void updateMass(Mass *mass){
+	//update mass position
+	mass->x += mass->xVel;
+	mass->y += mass->yVel;
+	
+	//update mass velocity
+	mass->xVel += mass->xAcc;
+	mass->yVel += mass->yAcc;
+}
+
 void printMass(Mass mass, int viewingWidth, int viewingHeight){
 	//only print if it is within viewing dimensions
 	//and will not print over the border
