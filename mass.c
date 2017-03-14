@@ -58,26 +58,33 @@ void updateMass(Mass *mass){
 	mass->yVel += mass->yAcc;
 }
 
-void printMass(Mass mass, int viewingWidth, int viewingHeight){
+void printMass(Mass mass, int viewingWidth, int viewingHeight, int printInfo){
 	//only print if it is within viewing dimensions
 	//and will not print over the border
 	if(mass.x>=1&&mass.y>=1&&
 		mass.x<viewingWidth-1&&mass.y<viewingHeight-1){
-		setCursor(mass.y,mass.x);//reverse becase expects row, col
+		setCursor(mass.y,mass.x);//reverse because expects row, col
 		put(MASS_CHARACTER);
+		if(printInfo){//print info below the mass
+			setCursor(mass.y+1,mass.x);
+			printf("%.E",mass.mass);
+			setCursor(mass.y+2,mass.x);
+			printf("(%d,%d)",(int)mass.x,(int)mass.y);
+		}
 	}
 
 }
 
-void printMassList(int size, Mass *masses[],int viewingWidth, int viewingHeight){
-	for(int i = 0; i < size; i++){
+void printMassList(int startIndex,int amount, Mass *masses[],int viewingWidth, int viewingHeight, int printInfo ){
+	for(int i = startIndex; i <startIndex+ amount; i++){
 		//print each one individually
-		printMass(*masses[i],viewingWidth,viewingHeight);
+		printMass(*masses[i],viewingWidth,viewingHeight,printInfo);
 	}
 }
 
 void printfMass(Mass mass){
-	printf("pos:(%f,%f) vel:(%f,%f) acc:(%f,%f)",mass.x,mass.y,mass.xVel,mass.yVel,mass.xAcc,mass.yAcc);
+	printf("pos:(%f,%f) vel:(%f,%f) acc:(%f,%f)",mass.x,mass.y,
+		mass.xVel,mass.yVel,mass.xAcc,mass.yAcc);
 }
 
 void clearMass(Mass mass, int viewingWidth, int viewingHeight){

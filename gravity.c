@@ -20,7 +20,7 @@ date: March 13, 2017
 #define DELAY_MS 16 //60 fps
 #define MAX_MASSES 100
 
-#define BEST_MASS 100000.0
+#define MASS_UNIT 1000000000 // multiple user enter by this
 
 static volatile int running =1;//the flag to notify if running or not
 
@@ -38,11 +38,13 @@ function: populateMassList
 description: allows the user to enter masses into the field
 	and mallocs memory to store the masses
 @param masses the list of masses to populate
+@param startIndex the index to start at in the list
 */
-int populateMassList(Mass *masses[]){
+int populateMassList(Mass *masses[],int startIndex){
 	int numMasses = 0;
 	clear();
         printBorder(0,0,WIDTH,HEIGHT);//print border of view
+	printMassList(0,startIndex, masses,WIDTH,HEIGHT,0);
 	do{	
                 double mass;
                 double x;
@@ -52,12 +54,15 @@ int populateMassList(Mass *masses[]){
 		setCursor(HEIGHT,0);//set cursor to bottom of border
                 printf("Mass information (non numeric to start simulation)."\
 			"\n    Mass: ");
+		fflush(stdin);
                 if(scanf("%lf",&mass)!=1)
 			break;//non numeric so exit loop
                 printf("    X: ");
+		fflush(stdin);
                 if(scanf("%lf",&x)!=1)
 			break;//non numeric so exit loop
                 printf("    Y: ");
+		fflush(stdin);
                 if(scanf("%lf",&y)!=1)
 			break;//non numeric so exit loop
 		
@@ -65,7 +70,7 @@ int populateMassList(Mass *masses[]){
                 Mass *tempMass = malloc(sizeof(Mass));
 
 		//set variables of mass struct
-                tempMass->mass = mass;
+                tempMass->mass = mass * MASS_UNIT;
                 tempMass->x = x;
                 tempMass->y = y;
                 tempMass->xVel = 0.0;
@@ -74,13 +79,45 @@ int populateMassList(Mass *masses[]){
                 tempMass->yAcc = 0.0;
 
 		//enter it into the list
-                masses[numMasses]=tempMass;
+                masses[startIndex+numMasses]=tempMass;
                 numMasses++;
-		//display all masses
-                printMassList(numMasses,masses,WIDTH,HEIGHT);
-        }while(1);//a non numeric user enter will exit loop
+		//display all masses created in this function
+                printMassList(startIndex,numMasses,masses,WIDTH,HEIGHT,1);
+        }while(startIndex+numMasses<MAX_MASSES);//a non numeric user enter will exit loop
 	
 	return numMasses;
+}
+
+/**
+function: preloadMassList
+description: preloads the mass list with a certain number of masses
+
+@param masses the list of masses to populate
+*/
+int preloadMassList(Mass *masses[]){
+        clear();
+        printBorder(0,0,WIDTH,HEIGHT);
+
+        //number of masses to spawn
+        int numMasses = rand()%MAX_MASSES;
+
+        for(int i = 0; i < numMasses;i++){
+                Mass *mass = malloc(sizeof(Mass));
+                mass->mass= ((rand()%100+1)/50.0)*MASS_UNIT;//random reasonable mass
+                mass->x = rand()%WIDTH;//random x within viewing 
+                mass->y = rand()%HEIGHT;//random y within viewing
+                mass->xVel = 0;//0 everything else
+                mass->yVel = 0;
+                mass->xAcc = 0;
+                mass->yAcc = 0;
+                masses[i]=mass;
+        }
+
+        printMassList(0,numMasses,masses,WIDTH,HEIGHT,0);
+
+        //allow user to enter more
+        numMasses+=populateMassList(masses,numMasses);
+        return numMasses;
 }
 
 /**
@@ -92,13 +129,13 @@ void run(){
 	int numMasses = 0;
 	int cycle = 0;
 	
-	numMasses = populateMassList(list);
+	numMasses = preloadMassList(list);
 	
 	clear();//clear the command prompt
 	printBorder(0,0,WIDTH,HEIGHT);
 	while(running){
 		//view stuff---
-		printMassList(numMasses,list,WIDTH,HEIGHT);
+		printMassList(0,numMasses,list,WIDTH,HEIGHT,0);
 
 		setCursor(HEIGHT,0);//set cursor to bottom of border
 		printf("Cycle %d\nnumMasses: %d\n",cycle,numMasses);
@@ -110,7 +147,7 @@ void run(){
 		cycle++;
 	}
 	//print masses one last time
-	printMassList(numMasses,list,WIDTH,HEIGHT);
+	printMassList(0,numMasses,list,WIDTH,HEIGHT,0);
 
 	//free all the malloced masses
 	freeMassList(numMasses,list);

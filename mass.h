@@ -53,19 +53,22 @@ description: prints a mass within the given viewing dimension
 @param mass the mass to print
 @param viewingWidth the width of the display
 @param viewingHeight the height of the display
+@param printInfo 0 to not print info, 1 to print info below mass
 */
-void printMass(Mass mass, int viewingWidth, int viewingHeight);
+void printMass(Mass mass, int viewingWidth, int viewingHeight,int printInfo);
 
 /**
 function: printMassList
 description: prints each mass in a list to the display within viewing constraints
-
-@param size the size of the list
+@param startIndex the index to start in the list
+@param amount the amount of masses to print
 @param masses a list of pointers to masses
 @param viewingWidth the width of the display
 @param viewingHeight the height of the display
+@param printInfo 0 to not print info, 1 to print info of mass below it
 */
-void printMassList(int size, Mass *masses[], int viewingWidth, int viewingHeight);
+void printMassList(int startIndex,int amount, Mass *masses[], int viewingWidth,
+	 int viewingHeight,int printInfo);
 
 /**
 function: printfMass
