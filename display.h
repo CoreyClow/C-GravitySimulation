@@ -41,4 +41,9 @@ description: prints a border symbolizing the edge of the viewing screen
 */
 void printBorder(int row, int col, int width, int height);
 
+/**
+clears a single spot on the command prompt
+*/
+void clearSpot(int row, int col);
+
 #endif

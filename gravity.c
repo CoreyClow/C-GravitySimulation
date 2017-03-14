@@ -32,12 +32,16 @@ void run(){
 	clear();//clear the command prompt
 	printBorder(0,0,width,height);
 	while(running){
+		//view stuff---
 		printMass(mass1,width,height);
-
 		setCursor(height,0);
 		printf("Cycle: %d\n",cycle);
-		cycle++;
 		delay(1000);
+		clearMass(mass1,width,height);
+
+		//model stuff---
+		mass1.x++;
+		cycle++;
 	}
 }
 

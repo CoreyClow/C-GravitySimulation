@@ -1,0 +1,5 @@
+commit 604c7742b7941b666c16194fe7d5e21beac81d8e
+Author: cmc4533 <cmc4533@g.rit.edu>
+Date:   Mon Mar 13 02:35:44 2017 -0400
+
+    first commit, setup initial framework such as mass files and display overwritting

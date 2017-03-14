@@ -28,9 +28,20 @@ function: printMass
 description: prints a mass within the given viewing dimension
 
 @param mass the mass to print
-@param viewingDimension the dimension of the viewing square to print
+@param viewingWidth the width of the display
+@param viewingHeight the height of the display
 */
 void printMass(Mass mass, int viewingWidth, int viewingHeight);
+
+/**
+function: clearMass
+description: clears a single mass from the display
+
+@param mass the mass to clear
+@param viewingWidth the width of the display
+@param viewingHeight the height of the display
+*/
+void clearMass(Mass mass, int viewingWidth, int viewingHeight);
 
 #endif
 

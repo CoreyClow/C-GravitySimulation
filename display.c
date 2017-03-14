@@ -52,3 +52,8 @@ void printBorder(int row, int col, int width, int height){
                 put(BORDER_CHARACTER);
         }
 }
+
+void clearSpot(int row, int col){
+	setCursor(row,col);
+	put(' ');
+}
