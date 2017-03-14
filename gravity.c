@@ -24,9 +24,11 @@ function: run
 description: the main prorgam loop
 */
 void run(){
-	Mass mass1 = {100000.0,5.0,20.0,0.0,0.0,0.0,0.0};
-	Mass mass2 = {100000.0,5.0,5.0,0.0,0.0,0.0,0.0};
-	Mass *list[] = {&mass1,&mass2};
+	Mass mass1 = {100000.0,20.0,20.0,.15,0.0,0.0,0.0};
+	Mass mass2 = {100000.0,5.0,5.0,0.0,0.15,0.0,0.0};
+	Mass mass3 = {100000.0,25.0,10.0,0.0,-.1,0.0,0.0};
+	Mass mass4 = {100000.0,50.0,20.0,.1,0.0,0.0,0.0};
+	Mass *list[] = {&mass1,&mass2,&mass3, &mass4};
 	int cycle = 0;
 
 	int running =1;
@@ -36,8 +38,7 @@ void run(){
 	printBorder(0,0,WIDTH,HEIGHT);
 	while(running){
 		//view stuff---
-		printMass(mass1,WIDTH,HEIGHT);
-		printMass(mass2,WIDTH,HEIGHT);
+		printMassList(4,list,WIDTH,HEIGHT);
 
 		setCursor(HEIGHT,0);
 		printf("Cycle: %d\n",cycle);
@@ -48,10 +49,9 @@ void run(){
 		printf("\n");
 
 		delay(DELAY_MS);
-		clearMass(mass1,WIDTH,HEIGHT);
-		clearMass(mass2,WIDTH,HEIGHT);
+		clearMassList(4,list,WIDTH,HEIGHT);
 		//model stuff---
-		updateMassList(2,list);
+		updateMassList(4,list);
 		cycle++;
 	}
 }

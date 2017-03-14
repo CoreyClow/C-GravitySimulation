@@ -13,7 +13,7 @@ set of functions and typedefs for mass
 
 #define G .0000000000667408//gravitational constant
 //6.67408*10^-11
-#define DISTANCE_CUTOFF 1//do not calculate acceleration if closer than this
+#define DISTANCE_CUTOFF 5.0//do not calculate acceleration if closer than this
 typedef struct{
         double mass;
         //position
@@ -56,6 +56,17 @@ description: prints a mass within the given viewing dimension
 void printMass(Mass mass, int viewingWidth, int viewingHeight);
 
 /**
+function: printMassList
+description: prints each mass in a list to the display within viewing constraints
+
+@param size the size of the list
+@param masses a list of pointers to masses
+@param viewingWidth the width of the display
+@param viewingHeight the height of the display
+*/
+void printMassList(int size, Mass *masses[], int viewingWidth, int viewingHeight);
+
+/**
 function: printfMass
 description: prints a tostring similar description of a mass
 
@@ -72,6 +83,17 @@ description: clears a single mass from the display
 @param viewingHeight the height of the display
 */
 void clearMass(Mass mass, int viewingWidth, int viewingHeight);
+
+/**
+function: clearMassList
+description: clears each mass in a list from the display
+
+@param size the size of the list
+@param masses the list pointers to a mass
+@param viewingWidth the width of the display
+@param viewingHeight the height of the display
+*/
+void clearMassList(int size, Mass *masses[], int viewingWidth, int viewingHeight);
 
 #endif
 

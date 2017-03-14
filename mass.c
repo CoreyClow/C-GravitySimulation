@@ -40,16 +40,6 @@ void updateMassList(int size, Mass *masses[]){
 			totalXAcc += accX;
 			totalYAcc += accY;
 			
-			/*
-			if(mass2->x-mass1->x>=0)//1 is left of 2
-				totalXAcc +=accX;
-			else if (mass2->x-mass1->x<0)//1 is right of 2
-				totalXAcc -= accX;
-			if(mass2->y-mass1->y>=0)//1 is above 2
-				totalYAcc += accY;
-			else if(mass2->y-mass1->y<0)//1 is below 2
-				totalYAcc -= accY;
-			*/
 		}
 		//set the accelerations
 		masses[i]->xAcc = totalXAcc;
@@ -79,6 +69,13 @@ void printMass(Mass mass, int viewingWidth, int viewingHeight){
 
 }
 
+void printMassList(int size, Mass *masses[],int viewingWidth, int viewingHeight){
+	for(int i = 0; i < size; i++){
+		//print each one individually
+		printMass(*masses[i],viewingWidth,viewingHeight);
+	}
+}
+
 void printfMass(Mass mass){
 	printf("pos:(%f,%f) vel:(%f,%f) acc:(%f,%f)",mass.x,mass.y,mass.xVel,mass.yVel,mass.xAcc,mass.yAcc);
 }
@@ -89,5 +86,12 @@ void clearMass(Mass mass, int viewingWidth, int viewingHeight){
 	if(mass.x>=1&&mass.y>=1&&
 		mass.x<viewingWidth-1&&mass.y<viewingHeight-1){
 		clearSpot(mass.y,mass.x);
+	}
+}
+
+void clearMassList(int size, Mass *masses[], int viewingWidth, int viewingHeight){
+	for(int i = 0; i < size; i++){
+		//clear each mass individually
+		clearMass(*masses[i],viewingWidth,viewingHeight);
 	}
 }
