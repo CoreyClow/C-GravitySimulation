@@ -3,4 +3,4 @@ This program utilizes the command line display to visually show the user a simul
 
 @author Corey Clow
 
-to run compile all files using gcc and run ./gravity
+To run, compile and link all files using gcc then run ./gravity
